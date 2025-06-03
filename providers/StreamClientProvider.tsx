@@ -10,25 +10,45 @@ import Loader from '@/components/Loader';
 const API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
 const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
-  const [videoClient, setVideoClient] = useState<StreamVideoClient>();
+  const [videoClient, setVideoClient] = useState<StreamVideoClient | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const { user, isLoaded } = useUser();
 
   useEffect(() => {
     if (!isLoaded || !user) return;
-    if (!API_KEY) throw new Error('Stream API key is missing');
+    
+    if (!API_KEY) {
+      console.error('Stream API key is missing');
+      setError('Stream API key is missing. Please check your environment variables.');
+      return;
+    }
 
-    const client = new StreamVideoClient({
-      apiKey: API_KEY,
-      user: {
-        id: user?.id,
-        name: user?.username || user?.id,
-        image: user?.imageUrl,
-      },
-      tokenProvider,
-    });
+    try {
+      const client = new StreamVideoClient({
+        apiKey: API_KEY,
+        user: {
+          id: user?.id,
+          name: user?.username || user?.id,
+          image: user?.imageUrl,
+        },
+        tokenProvider,
+      });
 
-    setVideoClient(client);
+      setVideoClient(client);
+    } catch (err) {
+      console.error('Error initializing Stream client:', err);
+      setError('Failed to initialize video client');
+    }
   }, [user, isLoaded]);
+
+  if (error) {
+    return (
+      <div className="flex-center h-screen w-full flex-col">
+        <p className="text-red-500">{error}</p>
+        <p className="text-sm text-gray-400 mt-2">Check your environment variables configuration</p>
+      </div>
+    );
+  }
 
   if (!videoClient) return <Loader />;
 
