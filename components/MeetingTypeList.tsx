@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 const meetingTypes = [
   {
@@ -14,6 +16,7 @@ const meetingTypes = [
     icon: '/icons/instant-meeting.svg',
     color: 'from-primary-600 to-primary-800',
     hoverColor: 'group-hover:from-primary-500 group-hover:to-primary-700',
+    badge: { text: 'Popular', variant: 'gradient' as const }
   },
   {
     id: 'schedule',
@@ -38,6 +41,7 @@ const meetingTypes = [
     icon: '/icons/personal.svg',
     color: 'from-warning-600 to-warning-800',
     hoverColor: 'group-hover:from-warning-500 group-hover:to-warning-700',
+    badge: { text: 'New', variant: 'success' as const }
   },
 ];
 
@@ -67,18 +71,30 @@ const MeetingTypeList = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {meetingTypes.map((type) => (
-        <button
+        <Card
           key={type.id}
+          variant="default"
+          hover="scale"
+          padding="lg"
+          className="group relative cursor-pointer flex flex-col items-center text-center"
           onClick={() => handleClick(type.id)}
           onMouseEnter={() => setHoveredId(type.id)}
           onMouseLeave={() => setHoveredId(null)}
-          className="group relative bg-secondary-800/50 rounded-xl border border-secondary-700/30 p-6 flex flex-col items-center text-center hover-card"
         >
           <div className={cn(
             "absolute inset-0 rounded-xl opacity-10 bg-gradient-to-br transition-all duration-300",
             type.color,
             type.hoverColor
           )}></div>
+          
+          {type.badge && (
+            <Badge 
+              variant={type.badge.variant} 
+              className="absolute top-3 right-3"
+            >
+              {type.badge.text}
+            </Badge>
+          )}
           
           <div className={cn(
             "size-16 rounded-full mb-4 flex items-center justify-center bg-gradient-to-br transition-all duration-300",
@@ -106,7 +122,7 @@ const MeetingTypeList = () => {
               <path d="M7 1L13 7M13 7L7 13M13 7H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-        </button>
+        </Card>
       ))}
     </div>
   );

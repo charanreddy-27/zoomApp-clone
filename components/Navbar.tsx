@@ -7,6 +7,7 @@ import { SignedIn, UserButton } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
 
 import MobileNav from './MobileNav';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -65,6 +66,8 @@ const Navbar = () => {
         </nav>
         
         <div className="flex items-center gap-4">
+          <ThemeToggle />
+          
           <SignedIn>
             <UserButton 
               afterSignOutUrl="/sign-in"

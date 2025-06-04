@@ -157,6 +157,78 @@ img, video, canvas, svg {
   border-radius: 50% !important;
 }
 
+/* Animated particles */
+.particles-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  opacity: 0.5;
+  animation: float-around linear infinite, glow 3s ease-in-out infinite alternate;
+  box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+}
+
+@keyframes float-around {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(100px, -50px);
+  }
+  50% {
+    transform: translate(200px, 0);
+  }
+  75% {
+    transform: translate(100px, 50px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+    opacity: 0.3;
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+    opacity: 0.6;
+  }
+}
+
+/* Typewriter effect */
+.typewriter {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid hsl(var(--primary));
+  width: 0;
+  animation: typing 3s steps(20, end) forwards, blink 1s step-end infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: hsl(var(--primary)) }
+}
+
+/* Tab content transition */
+.tab-content {
+  transition: opacity 0.3s ease;
+}
+
 /* Utility classes */
 @layer utilities {
   .flex-center {

@@ -1,4 +1,132 @@
+# MeetSync - Next-Generation Video Conferencing
 
+MeetSync is a modern, high-performance video conferencing platform built with Next.js, featuring AI-powered meeting tools and a sleek user interface.
+
+![MeetSync Screenshot](public/images/meetsync-screenshot.png)
+
+## Features
+
+- **Modern UI/UX**: Sleek design with smooth animations and intuitive navigation
+- **AI Meeting Assistant**: Real-time meeting summaries, action item detection, and smart suggestions
+- **Collaborative Tools**: Whiteboard, document sharing, and live polls
+- **Performance Optimized**: Fast loading times and efficient rendering
+- **Responsive Design**: Works seamlessly across all devices
+- **Dark/Light Mode**: Customizable theme support
+- **Enterprise Security**: End-to-end encryption and advanced security features
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **Authentication**: Clerk
+- **Video SDK**: Stream Video
+- **State Management**: React Hooks
+- **Styling**: Tailwind CSS with custom animations
+- **UI Components**: Shadcn UI (customized)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/meetsync.git
+   cd meetsync
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory with the following variables:
+   ```
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+   
+   NEXT_PUBLIC_STREAM_API_KEY=your_stream_api_key
+   STREAM_SECRET_KEY=your_stream_secret_key
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+meetsync/
+├── actions/        # Server actions
+├── app/            # App router pages and layouts
+├── components/     # React components
+├── constants/      # Application constants
+├── hooks/          # Custom React hooks
+├── lib/            # Utility functions
+├── providers/      # Context providers
+└── public/         # Static assets
+```
+
+## Key Components
+
+- **Navbar**: Navigation with scroll-based transparency
+- **Sidebar**: Main navigation for authenticated users
+- **AIAssistant**: AI-powered meeting assistant
+- **MeetingTypeList**: Different meeting creation options
+- **StreamClientProvider**: Video client initialization
+
+## Performance Optimizations
+
+- Memoized components for better rendering performance
+- Optimized animations with reduced motion support
+- Proper cleanup in useEffect hooks
+- Image optimization with Next.js Image component
+- Route prefetching for faster navigation
+
+## Design System
+
+The application uses a custom design system built on Tailwind CSS with:
+
+- Custom color palette with primary, secondary, accent, danger, and warning colors
+- Consistent spacing and typography
+- Modern glass effects
+- Smooth animations and transitions
+- Dark mode support
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [Clerk](https://clerk.dev/)
+- [Stream](https://getstream.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
