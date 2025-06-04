@@ -1,11 +1,18 @@
 'use client';
+
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-
-import { sidebarLinks } from '@/constants';
 import { cn } from '@/lib/utils';
+
+const sidebarLinks = [
+  { label: 'Home', route: '/', imgURL: '/icons/home.svg' },
+  { label: 'Personal Room', route: '/personal-room', imgURL: '/icons/room.svg' },
+  { label: 'Upcoming', route: '/upcoming', imgURL: '/icons/calendar.svg' },
+  { label: 'Previous', route: '/previous', imgURL: '/icons/history.svg' },
+  { label: 'Recordings', route: '/recordings', imgURL: '/icons/recording.svg' },
+];
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -18,55 +25,59 @@ const Sidebar = () => {
     });
   }, [router]);
 
-  const handleNavigation = (route: string) => {
-    // Direct DOM navigation for even faster transitions
-    window.location.href = route;
-  };
-
   return (
-    <section className="sticky left-0 top-0 flex h-screen w-fit flex-col justify-between bg-dark-1 p-6 pt-28 text-white max-sm:hidden lg:w-[264px] shadow-soft border-r border-dark-3/30">
-      <div className="flex flex-1 flex-col gap-5">
-        {sidebarLinks.map((item, index) => {
+    <aside className="hidden md:flex flex-col h-screen w-[240px] bg-secondary-900 border-r border-secondary-800 fixed left-0 top-0 pt-20">
+      <div className="flex flex-col flex-1 overflow-y-auto px-3 py-6 space-y-1">
+        {sidebarLinks.map((item) => {
           const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`);
           
           return (
-            <div
+            <Link
+              href={item.route}
               key={item.label}
-              onClick={() => handleNavigation(item.route)}
+              prefetch={true}
               className={cn(
-                'flex gap-4 items-center p-4 rounded-xl transition-all duration-200 cursor-pointer',
-                {
-                  'bg-blue-1 shadow-button': isActive,
-                  'hover:bg-dark-3/50': !isActive,
-                }
+                'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
+                isActive 
+                  ? 'bg-primary-600/20 text-primary-400' 
+                  : 'text-secondary-100 hover:bg-secondary-800'
               )}
-              style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <div className="relative">
+              <div className="relative flex-shrink-0 size-5">
                 <Image
                   src={item.imgURL}
                   alt={item.label}
-                  width={24}
-                  height={24}
-                  className={cn("transition-transform duration-200", {
-                    "scale-110": isActive
+                  width={20}
+                  height={20}
+                  className={cn("transition-transform", {
+                    "text-primary-400": isActive
                   })}
-                  priority={true}
                 />
                 {isActive && (
-                  <span className="absolute -bottom-1 -right-1 size-2 bg-white rounded-full animate-pulse-gentle" />
+                  <span className="absolute -right-0.5 -top-0.5 size-2 bg-primary-500 rounded-full animate-pulse" />
                 )}
               </div>
-              <p className={cn("text-lg font-medium max-lg:hidden transition-all duration-200", {
-                "font-semibold": isActive
-              })}>
-                {item.label}
-              </p>
-            </div>
+              <span className="font-medium">{item.label}</span>
+            </Link>
           );
         })}
       </div>
-    </section>
+      
+      <div className="p-3 border-t border-secondary-800">
+        <Link
+          href="/meeting/new"
+          className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
+        >
+          <Image 
+            src="/icons/add-meeting.svg" 
+            alt="New Meeting" 
+            width={18} 
+            height={18} 
+          />
+          <span>New Meeting</span>
+        </Link>
+      </div>
+    </aside>
   );
 };
 

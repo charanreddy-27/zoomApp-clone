@@ -8,46 +8,58 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+// Optimize font loading
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+  preload: true,
+});
 
 export const metadata: Metadata = {
-  title: "MEET HERE",
-  description: "Video calling App",
+  title: "MeetSync",
+  description: "Next-generation video conferencing platform",
   icons: {
     icon: "/icons/logo.svg",
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <ClerkProvider
         appearance={{
           layout: {
             socialButtonsVariant: "iconButton",
-            logoImageUrl: "/icons/MEET HERE-logo.svg",
+            logoImageUrl: "/icons/logo.svg",
           },
           variables: {
-            colorText: "#fff",
-            colorPrimary: "#2563EB",
-            colorBackground: "#121826",
-            colorInputBackground: "#1E2A45",
-            colorInputText: "#fff",
+            colorPrimary: "hsl(217.2, 91.2%, 59.8%)",
+            colorBackground: "hsl(222.2, 84%, 4.9%)",
+            colorInputBackground: "hsl(217.2, 32.6%, 17.5%)",
+            colorInputText: "hsl(210, 40%, 98%)",
+            colorText: "hsl(210, 40%, 98%)",
           },
           elements: {
-            formButtonPrimary: "shadow-button hover:shadow-lg transition-all duration-300",
-            card: "shadow-card",
-            formFieldInput: "transition-all duration-300 focus:shadow-soft",
+            formButtonPrimary: "shadow-md hover:shadow-lg transition-all duration-200",
+            card: "shadow-lg",
+            formFieldInput: "transition-all duration-200 focus:shadow-md",
           },
         }}
       >
-        <body className={`${inter.className} bg-dark-2 animate-fade-in`}>
+        <body className="min-h-screen antialiased">
           <Toaster />
-          <div className="animate-slide-up">
+          <main className="animate-fade">
             {children}
-          </div>
+          </main>
         </body>
       </ClerkProvider>
     </html>

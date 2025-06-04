@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -15,6 +15,14 @@ const AIAssistant = ({ isInMeeting = false }: AIAssistantProps) => {
   const [query, setQuery] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [responses, setResponses] = useState<{ type: 'user' | 'ai'; text: string }[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Auto-scroll to bottom of messages
+  useEffect(() => {
+    if (messagesEndRef.current && isOpen) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [responses, isOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +49,7 @@ const AIAssistant = ({ isInMeeting = false }: AIAssistantProps) => {
       setResponses(prev => [...prev, { type: 'ai', text: aiResponse }]);
       setIsProcessing(false);
       setQuery('');
-    }, 1500);
+    }, 1000);
   };
 
   const suggestions = [
@@ -53,34 +61,44 @@ const AIAssistant = ({ isInMeeting = false }: AIAssistantProps) => {
 
   return (
     <div className={cn(
-      "fixed bottom-24 right-6 z-50 flex flex-col items-end",
-      isInMeeting && "bottom-28"
+      "fixed bottom-6 right-6 z-50 flex flex-col items-end",
+      isInMeeting && "bottom-24"
     )}>
       {isOpen && (
-        <div className="bg-dark-1 rounded-2xl shadow-card mb-4 w-[350px] max-h-[500px] flex flex-col animate-scale-in overflow-hidden border border-dark-3/50">
-          <div className="bg-gradient-to-r from-blue-1 to-purple-1 p-4 flex justify-between items-center">
-            <h3 className="text-white font-semibold">Meeting Assistant</h3>
+        <div className="bg-secondary-900 rounded-2xl shadow-lg mb-4 w-[350px] max-h-[500px] flex flex-col animate-scale border border-secondary-800 overflow-hidden">
+          <div className="bg-gradient-to-r from-primary-600 to-accent-600 p-4 flex justify-between items-center">
+            <h3 className="text-white font-semibold">AI Assistant</h3>
             <Button 
               variant="ghost" 
               size="icon" 
               className="h-8 w-8 rounded-full bg-white/10 hover:bg-white/20"
               onClick={() => setIsOpen(false)}
             >
-              <Image src="/icons/close.svg" width={16} height={16} alt="Close" />
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 1L1 13M1 1L13 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </Button>
           </div>
           
           <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 max-h-[320px]">
             {responses.length === 0 ? (
-              <div className="text-center text-gray-400 py-8">
-                <p>Ask me anything about your meetings!</p>
+              <div className="text-center text-secondary-400 py-8">
+                <div className="size-16 mx-auto mb-4 rounded-full bg-primary-600/20 flex items-center justify-center">
+                  <Image 
+                    src="/icons/ai-assistant.svg" 
+                    width={32} 
+                    height={32} 
+                    alt="AI Assistant" 
+                  />
+                </div>
+                <p>How can I help you with your meetings?</p>
                 <div className="flex flex-wrap gap-2 mt-4 justify-center">
                   {suggestions.map((suggestion, i) => (
                     <Button 
                       key={i} 
                       variant="outline" 
                       size="sm" 
-                      className="bg-dark-3/50 border-none text-sm"
+                      className="bg-secondary-800 border-none text-sm hover:bg-secondary-700"
                       onClick={() => {
                         setQuery(suggestion);
                         handleSubmit({ preventDefault: () => {} } as React.FormEvent);
@@ -98,41 +116,44 @@ const AIAssistant = ({ isInMeeting = false }: AIAssistantProps) => {
                   className={cn(
                     "p-3 rounded-xl max-w-[90%]",
                     response.type === 'user' 
-                      ? "bg-blue-1 text-white self-end" 
-                      : "bg-dark-3 text-white self-start"
+                      ? "bg-primary-600 text-white self-end" 
+                      : "bg-secondary-800 text-white self-start"
                   )}
                 >
                   {response.text.split('\n').map((line, j) => (
-                    <p key={j}>{line}</p>
+                    <p key={j} className={j > 0 ? "mt-1" : ""}>{line}</p>
                   ))}
                 </div>
               ))
             )}
             {isProcessing && (
-              <div className="bg-dark-3 p-3 rounded-xl max-w-[90%] self-start flex items-center gap-2">
+              <div className="bg-secondary-800 p-3 rounded-xl max-w-[90%] self-start flex items-center gap-2">
                 <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-blue-3 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                  <span className="w-2 h-2 bg-blue-3 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                  <span className="w-2 h-2 bg-blue-3 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                  <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                  <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                  <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                 </div>
-                <p className="text-sm text-gray-300">Thinking...</p>
+                <p className="text-sm text-secondary-300">Thinking...</p>
               </div>
             )}
+            <div ref={messagesEndRef} />
           </div>
           
-          <form onSubmit={handleSubmit} className="p-4 border-t border-dark-3/50 flex gap-2">
+          <form onSubmit={handleSubmit} className="p-4 border-t border-secondary-800 flex gap-2">
             <Input 
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Ask about your meeting..."
-              className="bg-dark-3 border-none focus-visible:ring-blue-1"
+              className="bg-secondary-800 border-none focus-visible:ring-primary-500"
             />
             <Button 
               type="submit" 
-              className="bg-blue-1 hover:bg-blue-2"
+              className="bg-primary-600 hover:bg-primary-700"
               disabled={isProcessing}
             >
-              <Image src="/icons/send.svg" width={18} height={18} alt="Send" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </Button>
           </form>
         </div>
@@ -141,7 +162,7 @@ const AIAssistant = ({ isInMeeting = false }: AIAssistantProps) => {
       <Button 
         onClick={() => setIsOpen(!isOpen)} 
         className={cn(
-          "rounded-full size-14 shadow-button bg-gradient-to-r from-blue-1 to-purple-1 hover:shadow-lg p-0 transition-all duration-300",
+          "rounded-full size-14 shadow-lg bg-gradient-to-r from-primary-600 to-accent-600 hover:shadow-xl p-0 transition-all duration-200",
           isOpen && "rotate-45"
         )}
       >
@@ -150,7 +171,7 @@ const AIAssistant = ({ isInMeeting = false }: AIAssistantProps) => {
           width={28} 
           height={28} 
           alt="AI Assistant" 
-          className="transition-transform duration-300"
+          className="transition-transform duration-200"
         />
       </Button>
     </div>
