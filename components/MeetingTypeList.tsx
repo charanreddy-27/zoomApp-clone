@@ -58,10 +58,15 @@ const MeetingTypeList = () => {
       }
       toast({
         title: 'Meeting Created',
+        description: 'Your meeting has been successfully created',
+        className: 'bg-green-1 text-white border-none',
       });
     } catch (error) {
       console.error(error);
-      toast({ title: 'Failed to create Meeting' });
+      toast({ 
+        title: 'Failed to create Meeting', 
+        variant: 'destructive' 
+      });
     }
   };
 
@@ -72,7 +77,7 @@ const MeetingTypeList = () => {
   const meetingLink = `${baseUrl}/meeting/${callDetail?.id}`;
 
   return (
-    <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+    <section className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4 animate-fade-in">
       <HomeCard
         img="/icons/add-meeting.svg"
         title="New Meeting"
@@ -108,19 +113,20 @@ const MeetingTypeList = () => {
           title="Create Meeting"
           handleClick={createMeeting}
         >
-          <div className="flex flex-col gap-2.5">
-            <label className="text-base font-normal leading-[22.4px] text-sky-2">
+          <div className="flex flex-col gap-3">
+            <label className="text-base font-medium leading-[22.4px] text-sky-2">
               Add a description
             </label>
             <Textarea
-              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-xl shadow-soft"
               onChange={(e) =>
                 setValues({ ...values, description: e.target.value })
               }
+              placeholder="Meeting description..."
             />
           </div>
-          <div className="flex w-full flex-col gap-2.5">
-            <label className="text-base font-normal leading-[22.4px] text-sky-2">
+          <div className="flex w-full flex-col gap-3">
+            <label className="text-base font-medium leading-[22.4px] text-sky-2">
               Select Date and Time
             </label>
             <ReactDatePicker
@@ -131,7 +137,7 @@ const MeetingTypeList = () => {
               timeIntervals={15}
               timeCaption="time"
               dateFormat="MMMM d, yyyy h:mm aa"
-              className="w-full rounded bg-dark-3 p-2 focus:outline-none"
+              className="w-full rounded-xl bg-dark-3 p-3 focus:outline-none shadow-soft"
             />
           </div>
         </MeetingModal>
@@ -142,7 +148,11 @@ const MeetingTypeList = () => {
           title="Meeting Created"
           handleClick={() => {
             navigator.clipboard.writeText(meetingLink);
-            toast({ title: 'Link Copied' });
+            toast({ 
+              title: 'Link Copied',
+              description: 'Meeting link copied to clipboard',
+              className: 'bg-blue-1 text-white border-none',
+            });
           }}
           image={'/icons/checked.svg'}
           buttonIcon="/icons/copy.svg"
@@ -162,7 +172,7 @@ const MeetingTypeList = () => {
         <Input
           placeholder="Meeting link"
           onChange={(e) => setValues({ ...values, link: e.target.value })}
-          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-xl shadow-soft p-3"
         />
       </MeetingModal>
 

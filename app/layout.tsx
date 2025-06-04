@@ -31,16 +31,23 @@ export default function RootLayout({
           },
           variables: {
             colorText: "#fff",
-            colorPrimary: "#0E78F9",
-            colorBackground: "#1C1F2E",
-            colorInputBackground: "#252A41",
+            colorPrimary: "#2563EB",
+            colorBackground: "#121826",
+            colorInputBackground: "#1E2A45",
             colorInputText: "#fff",
+          },
+          elements: {
+            formButtonPrimary: "shadow-button hover:shadow-lg transition-all duration-300",
+            card: "shadow-card",
+            formFieldInput: "transition-all duration-300 focus:shadow-soft",
           },
         }}
       >
-        <body className={`${inter.className} bg-dark-2`}>
+        <body className={`${inter.className} bg-dark-2 animate-fade-in`}>
           <Toaster />
-          {children}
+          <div className="animate-slide-up">
+            {children}
+          </div>
         </body>
       </ClerkProvider>
     </html>
