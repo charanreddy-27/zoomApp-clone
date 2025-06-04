@@ -1,4 +1,5 @@
 import MeetingTypeList from '@/components/MeetingTypeList';
+import AIAssistant from '@/components/AIAssistant';
 
 const Home = () => {
   const now = new Date();
@@ -24,6 +25,9 @@ const Home = () => {
       </div>
 
       <MeetingTypeList />
+      
+      {/* AI Assistant is always available on all pages */}
+      <AIAssistant />
     </section>
   );
 };

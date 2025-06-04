@@ -1,13 +1,27 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { sidebarLinks } from '@/constants';
 import { cn } from '@/lib/utils';
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  // Prefetch all routes for instant navigation
+  useEffect(() => {
+    sidebarLinks.forEach(link => {
+      router.prefetch(link.route);
+    });
+  }, [router]);
+
+  const handleNavigation = (route: string) => {
+    // Direct DOM navigation for even faster transitions
+    window.location.href = route;
+  };
 
   return (
     <section className="sticky left-0 top-0 flex h-screen w-fit flex-col justify-between bg-dark-1 p-6 pt-28 text-white max-sm:hidden lg:w-[264px] shadow-soft border-r border-dark-3/30">
@@ -16,11 +30,11 @@ const Sidebar = () => {
           const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`);
           
           return (
-            <Link
-              href={item.route}
+            <div
               key={item.label}
+              onClick={() => handleNavigation(item.route)}
               className={cn(
-                'flex gap-4 items-center p-4 rounded-xl transition-all duration-300',
+                'flex gap-4 items-center p-4 rounded-xl transition-all duration-200 cursor-pointer',
                 {
                   'bg-blue-1 shadow-button': isActive,
                   'hover:bg-dark-3/50': !isActive,
@@ -34,20 +48,21 @@ const Sidebar = () => {
                   alt={item.label}
                   width={24}
                   height={24}
-                  className={cn("transition-transform duration-300", {
+                  className={cn("transition-transform duration-200", {
                     "scale-110": isActive
                   })}
+                  priority={true}
                 />
                 {isActive && (
                   <span className="absolute -bottom-1 -right-1 size-2 bg-white rounded-full animate-pulse-gentle" />
                 )}
               </div>
-              <p className={cn("text-lg font-medium max-lg:hidden transition-all duration-300", {
+              <p className={cn("text-lg font-medium max-lg:hidden transition-all duration-200", {
                 "font-semibold": isActive
               })}>
                 {item.label}
               </p>
-            </Link>
+            </div>
           );
         })}
       </div>
