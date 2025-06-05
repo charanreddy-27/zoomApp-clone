@@ -1,34 +1,54 @@
-# MeetSync - Next-Generation Video Conferencing
+# MeetSync - Next Generation Video Conferencing
 
-MeetSync is a modern, high-performance video conferencing platform built with Next.js, featuring AI-powered meeting tools and a sleek user interface.
-
-![MeetSync Screenshot](public/images/meetsync-screenshot.png)
+MeetSync is a modern video conferencing platform built with Next.js, featuring AI-powered meeting assistance, real-time collaboration tools, and a sleek user interface.
 
 ## Features
 
-- **Modern UI/UX**: Sleek design with smooth animations and intuitive navigation
-- **AI Meeting Assistant**: Real-time meeting summaries, action item detection, and smart suggestions
-- **Collaborative Tools**: Whiteboard, document sharing, and live polls
-- **Performance Optimized**: Fast loading times and efficient rendering
-- **Responsive Design**: Works seamlessly across all devices
-- **Dark/Light Mode**: Customizable theme support
-- **Enterprise Security**: End-to-end encryption and advanced security features
+- **Instant Meetings**: Start meetings with a single click
+- **Personal Meeting Rooms**: Dedicated spaces for recurring meetings
+- **AI Meeting Assistant**: Get real-time summaries and action items
+- **Live Transcription**: Automatic speech-to-text with language support
+- **Collaborative Whiteboard**: Draw and collaborate in real-time
+- **Virtual Backgrounds**: Choose from various backgrounds or upload your own
+- **Cloud Recording**: Record meetings and access them anytime
 
 ## Tech Stack
 
-- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **Frontend**: Next.js 14, React 18, TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui components
 - **Authentication**: Clerk
 - **Video SDK**: Stream Video
-- **State Management**: React Hooks
-- **Styling**: Tailwind CSS with custom animations
-- **UI Components**: Shadcn UI (customized)
+- **Deployment**: Vercel
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18 or later
 - npm or yarn
+- Stream account for video SDK
+- Clerk account for authentication
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```
+# Base URL
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+# Stream Video
+NEXT_PUBLIC_STREAM_KEY=your_stream_key
+STREAM_SECRET=your_stream_secret
+```
 
 ### Installation
 
@@ -45,28 +65,34 @@ MeetSync is a modern, high-performance video conferencing platform built with Ne
    yarn install
    ```
 
-3. Set up environment variables:
-   Create a `.env.local` file in the root directory with the following variables:
-   ```
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-   CLERK_SECRET_KEY=your_clerk_secret_key
-   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
-   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
-   
-   NEXT_PUBLIC_STREAM_API_KEY=your_stream_api_key
-   STREAM_SECRET_KEY=your_stream_secret_key
-   ```
-
-4. Run the development server:
+3. Run the development server:
    ```bash
    npm run dev
    # or
    yarn dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deployment to Vercel
+
+### One-Click Deployment
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Fmeetsync&env=NEXT_PUBLIC_BASE_URL,NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,CLERK_SECRET_KEY,NEXT_PUBLIC_CLERK_SIGN_IN_URL,NEXT_PUBLIC_CLERK_SIGN_UP_URL,NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,NEXT_PUBLIC_STREAM_KEY,STREAM_SECRET&project-name=meetsync&repository-name=meetsync)
+
+### Manual Deployment
+
+1. Push your code to GitHub.
+
+2. Log in to [Vercel](https://vercel.com) and import your repository.
+
+3. Configure the environment variables in the Vercel dashboard.
+
+4. Deploy your application.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Project Structure
 
@@ -116,10 +142,6 @@ The application uses a custom design system built on Tailwind CSS with:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Acknowledgments
 
 - [Next.js](https://nextjs.org/)
@@ -138,7 +160,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Tailwind CSS
 
 ## <a name="features">🔋 Features</a>
-
 
 👉 **Authentication**: Implements authentication and authorization features using Clerk, allowing users to securely log in via social sign-on or traditional email and password methods, while ensuring appropriate access levels and permissions within the platform.
 
@@ -205,7 +226,6 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
-
 
 ## 🎨 **Connect With Me**
 <p align="center">
