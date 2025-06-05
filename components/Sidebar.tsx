@@ -26,8 +26,8 @@ const Sidebar = () => {
   }, [router]);
 
   return (
-    <aside className="hidden md:flex flex-col h-screen w-[240px] bg-secondary-900 border-r border-secondary-800 fixed left-0 top-0 pt-20">
-      <div className="flex flex-col flex-1 overflow-y-auto px-3 py-6 space-y-1">
+    <aside className="hidden md:flex flex-col h-screen w-[220px] bg-secondary-900 border-r border-secondary-800 fixed left-0 top-0 pt-20">
+      <div className="flex flex-col flex-1 overflow-y-auto px-3 py-4 space-y-1">
         {sidebarLinks.map((item) => {
           const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`);
           
@@ -37,7 +37,7 @@ const Sidebar = () => {
               key={item.label}
               prefetch={true}
               className={cn(
-                'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
+                'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
                 isActive 
                   ? 'bg-primary-600/20 text-primary-400' 
                   : 'text-secondary-100 hover:bg-secondary-800'
@@ -49,7 +49,7 @@ const Sidebar = () => {
                   alt={item.label}
                   width={20}
                   height={20}
-                  className={cn("transition-transform", {
+                  className={cn({
                     "text-primary-400": isActive
                   })}
                 />
@@ -57,7 +57,7 @@ const Sidebar = () => {
                   <span className="absolute -right-0.5 -top-0.5 size-2 bg-primary-500 rounded-full animate-pulse" />
                 )}
               </div>
-              <span className="font-medium">{item.label}</span>
+              <span className="font-medium text-sm">{item.label}</span>
             </Link>
           );
         })}
@@ -66,7 +66,7 @@ const Sidebar = () => {
       <div className="p-3 border-t border-secondary-800">
         <Link
           href="/meeting/new"
-          className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
+          className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
         >
           <Image 
             src="/icons/add-meeting.svg" 
@@ -74,7 +74,7 @@ const Sidebar = () => {
             width={18} 
             height={18} 
           />
-          <span>New Meeting</span>
+          <span className="text-sm font-medium">New Meeting</span>
         </Link>
       </div>
     </aside>

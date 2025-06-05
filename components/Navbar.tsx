@@ -40,21 +40,21 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link 
           href="/" 
-          className="flex items-center gap-3 group"
+          className="flex items-center gap-2 group"
           prefetch={true}
         >
-          <div className="relative size-10 overflow-hidden">
+          <div className="relative size-9 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-tr from-primary-600 to-accent-500 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
             <Image
               src="/icons/logo.svg"
-              width={40}
-              height={40}
+              width={36}
+              height={36}
               alt="MeetSync"
               className="relative z-10 p-1.5"
               priority
             />
           </div>
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400 hidden sm:block">
+          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400 hidden sm:block">
             MeetSync
           </span>
         </Link>
@@ -65,7 +65,7 @@ const Navbar = () => {
           <NavLink href="/support">Support</NavLink>
         </nav>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <ThemeToggle />
           
           <SignedIn>
@@ -79,7 +79,9 @@ const Navbar = () => {
             />
           </SignedIn>
 
-          <MobileNav />
+          <div className="md:hidden">
+            <MobileNav />
+          </div>
         </div>
       </div>
     </header>
