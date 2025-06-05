@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 const meetingTypes = [
@@ -71,18 +70,15 @@ const MeetingTypeList = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {meetingTypes.map((type) => (
-        <Card
+        <div
           key={type.id}
-          variant="default"
-          hover="scale"
-          padding="lg"
-          className="group relative cursor-pointer flex flex-col items-center text-center"
+          className="group relative cursor-pointer flex flex-col items-center text-center bg-secondary-800/50 hover:bg-secondary-800/80 border border-secondary-700/50 p-4 rounded-lg transition-all duration-200 hover:scale-[1.02]"
           onClick={() => handleClick(type.id)}
           onMouseEnter={() => setHoveredId(type.id)}
           onMouseLeave={() => setHoveredId(null)}
         >
           <div className={cn(
-            "absolute inset-0 rounded-xl opacity-10 bg-gradient-to-br transition-all duration-300",
+            "absolute inset-0 rounded-lg opacity-10 bg-gradient-to-br transition-all duration-300",
             type.color,
             type.hoverColor
           )}></div>
@@ -90,39 +86,39 @@ const MeetingTypeList = () => {
           {type.badge && (
             <Badge 
               variant={type.badge.variant} 
-              className="absolute top-3 right-3"
+              className="absolute top-2 right-2 text-xs"
             >
               {type.badge.text}
             </Badge>
           )}
           
           <div className={cn(
-            "size-16 rounded-full mb-4 flex items-center justify-center bg-gradient-to-br transition-all duration-300",
+            "size-14 rounded-full mb-3 flex items-center justify-center bg-gradient-to-br transition-all duration-300",
             type.color,
             type.hoverColor
           )}>
             <Image 
               src={type.icon} 
               alt={type.title} 
-              width={28} 
-              height={28} 
+              width={24} 
+              height={24} 
               className="transition-transform duration-300 group-hover:scale-110"
             />
           </div>
           
-          <h3 className="text-lg font-semibold mb-1">{type.title}</h3>
-          <p className="text-sm text-secondary-400">{type.description}</p>
+          <h3 className="text-base font-semibold mb-1">{type.title}</h3>
+          <p className="text-xs text-secondary-400">{type.description}</p>
           
           <div className={cn(
-            "mt-4 size-8 rounded-full flex items-center justify-center bg-gradient-to-br transition-all duration-300 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0",
+            "mt-3 size-6 rounded-full flex items-center justify-center bg-gradient-to-br transition-all duration-300 opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0",
             type.color,
             type.hoverColor
           )}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 1L13 7M13 7L7 13M13 7H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-        </Card>
+        </div>
       ))}
     </div>
   );

@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: Readonly<{children: ReactNode}>) => {
   return (
-    <main className="relative bg-secondary-950 min-h-screen text-white">
+    <main className="relative bg-gradient-to-b from-secondary-950 to-secondary-900 min-h-screen text-white">
       <Navbar />
 
       <div className="flex">
         <Sidebar />
         
-        <section className="flex min-h-screen flex-1 flex-col px-4 pb-8 pt-24 md:pl-[240px] md:pr-8 lg:px-12 lg:pl-[260px]">
+        <section className="flex min-h-screen flex-1 flex-col px-4 pb-8 pt-20 md:pl-[220px] md:pr-6 lg:px-8 lg:pl-[220px]">
           <div className="w-full max-w-7xl mx-auto">{children}</div>
         </section>
       </div>

@@ -26,8 +26,8 @@ const Sidebar = () => {
   }, [router]);
 
   return (
-    <aside className="hidden md:flex flex-col h-screen w-[220px] bg-secondary-900 border-r border-secondary-800 fixed left-0 top-0 pt-20">
-      <div className="flex flex-col flex-1 overflow-y-auto px-3 py-4 space-y-1">
+    <aside className="hidden md:flex flex-col h-screen w-[200px] bg-secondary-900/95 border-r border-secondary-800/70 fixed left-0 top-0 pt-16">
+      <div className="flex flex-col flex-1 overflow-y-auto px-2 py-4 space-y-1">
         {sidebarLinks.map((item) => {
           const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`);
           
@@ -37,24 +37,24 @@ const Sidebar = () => {
               key={item.label}
               prefetch={true}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors',
+                'flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors text-sm',
                 isActive 
                   ? 'bg-primary-600/20 text-primary-400' 
-                  : 'text-secondary-100 hover:bg-secondary-800'
+                  : 'text-secondary-200 hover:bg-secondary-800 hover:text-white'
               )}
             >
-              <div className="relative flex-shrink-0 size-5">
+              <div className="relative flex-shrink-0 size-4">
                 <Image
                   src={item.imgURL}
                   alt={item.label}
-                  width={20}
-                  height={20}
+                  width={16}
+                  height={16}
                   className={cn({
                     "text-primary-400": isActive
                   })}
                 />
                 {isActive && (
-                  <span className="absolute -right-0.5 -top-0.5 size-2 bg-primary-500 rounded-full animate-pulse" />
+                  <span className="absolute -right-0.5 -top-0.5 size-1.5 bg-primary-500 rounded-full animate-pulse" />
                 )}
               </div>
               <span className="font-medium text-sm">{item.label}</span>
@@ -63,16 +63,16 @@ const Sidebar = () => {
         })}
       </div>
       
-      <div className="p-3 border-t border-secondary-800">
+      <div className="p-2 border-t border-secondary-800/70">
         <Link
           href="/meeting/new"
-          className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
+          className="flex items-center justify-center gap-2 w-full py-2 px-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
         >
           <Image 
             src="/icons/add-meeting.svg" 
             alt="New Meeting" 
-            width={18} 
-            height={18} 
+            width={16} 
+            height={16} 
           />
           <span className="text-sm font-medium">New Meeting</span>
         </Link>
