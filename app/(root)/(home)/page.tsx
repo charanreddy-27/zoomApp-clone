@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
 
 const Home = () => {
   const now = new Date();
@@ -13,61 +14,61 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-secondary-950 to-secondary-900 pb-16">
+    <div className="pb-16">
       {/* Header section */}
-      <section className="relative pt-20 pb-12 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="space-y-6">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-600/20 text-primary-400 text-sm mb-2">
+      <section className="relative pt-8 pb-12 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="space-y-5">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary-600/20 text-primary-400 text-sm">
               <span className="size-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
               Next-Generation Video Conferencing
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              <span className="text-gradient">MeetSync</span> <br />
-              <span className="typewriter">Smarter Meetings.</span>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">MeetSync</span> <br />
+              <span className="text-white">Smarter Meetings.</span>
             </h1>
-            <p className="text-lg text-secondary-300 max-w-lg">
+            <p className="text-base md:text-lg text-secondary-300 max-w-lg">
               Experience seamless collaboration with AI-powered features, real-time tools, and superior performance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-700 hover:to-accent-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all">
+              <Link href="/meeting/new" className="px-5 py-2.5 bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-700 hover:to-accent-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all text-center font-medium">
                 Start New Meeting
-              </button>
-              <button className="px-6 py-3 bg-secondary-800 hover:bg-secondary-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all group">
+              </Link>
+              <button className="px-5 py-2.5 bg-secondary-800 hover:bg-secondary-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all group flex items-center justify-center font-medium">
                 Join Meeting
                 <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
               </button>
             </div>
           </div>
-          <div className="relative h-[300px] md:h-[400px]">
+          <div className="relative h-[280px] md:h-[360px]">
             <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-2xl blur-3xl"></div>
             <div className="relative h-full w-full flex items-center justify-center">
-              <div className="bg-secondary-900/80 backdrop-blur-md rounded-2xl p-6 w-full max-w-md border border-secondary-800/50 shadow-lg">
-                <div className="flex justify-between items-center mb-4">
+              <div className="bg-secondary-900/80 backdrop-blur-md rounded-2xl p-5 w-full max-w-md border border-secondary-800/50 shadow-lg">
+                <div className="flex justify-between items-center mb-3">
                   <h2 className="font-semibold text-lg text-white">Today</h2>
                   <span className="text-primary-400">{time}</span>
                 </div>
-                <p className="text-secondary-300 mb-6">{date}</p>
+                <p className="text-secondary-300 mb-4 text-sm">{date}</p>
                 
-                <div className="space-y-4">
-                  <div className="bg-secondary-800/50 p-4 rounded-lg border border-secondary-700/50 hover:bg-secondary-800/70 transition-colors">
-                    <div className="flex justify-between items-center mb-2">
+                <div className="space-y-3">
+                  <div className="bg-secondary-800/50 p-3 rounded-lg border border-secondary-700/50 hover:bg-secondary-800/70 transition-colors">
+                    <div className="flex justify-between items-center mb-1.5">
                       <h3 className="font-medium">Weekly Team Sync</h3>
                       <span className="text-sm text-primary-400">12:30 PM</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-secondary-400">
+                    <div className="flex items-center gap-2 text-xs text-secondary-400">
                       <span>4 participants</span>
                       <span className="size-1 rounded-full bg-secondary-500"></span>
                       <span>30 min</span>
                     </div>
                   </div>
                   
-                  <div className="bg-secondary-800/50 p-4 rounded-lg border border-secondary-700/50 hover:bg-secondary-800/70 transition-colors">
-                    <div className="flex justify-between items-center mb-2">
+                  <div className="bg-secondary-800/50 p-3 rounded-lg border border-secondary-700/50 hover:bg-secondary-800/70 transition-colors">
+                    <div className="flex justify-between items-center mb-1.5">
                       <h3 className="font-medium">Product Review</h3>
                       <span className="text-sm text-primary-400">3:00 PM</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-secondary-400">
+                    <div className="flex items-center gap-2 text-xs text-secondary-400">
                       <span>6 participants</span>
                       <span className="size-1 rounded-full bg-secondary-500"></span>
                       <span>45 min</span>
@@ -81,17 +82,17 @@ const Home = () => {
       </section>
       
       {/* Meeting options section */}
-      <section className="py-10 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold mb-8 text-center">Quick Actions</h2>
+      <section className="py-8 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Quick Actions</h2>
         <MeetingTypeList />
       </section>
       
       {/* Features section with tabs */}
-      <section className="py-10 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-center">Why Choose MeetSync?</h2>
-        <p className="text-center text-secondary-400 max-w-2xl mx-auto mb-8">Discover how our platform transforms your meeting experience with cutting-edge features</p>
+      <section className="py-8 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 className="text-xl md:text-2xl font-bold mb-3 text-center">Why Choose MeetSync?</h2>
+        <p className="text-center text-secondary-400 max-w-2xl mx-auto mb-6 text-sm md:text-base">Discover how our platform transforms your meeting experience with cutting-edge features</p>
         
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-3 mb-6">
           <TabButton 
             active={activeTab === 'overview'} 
             onClick={() => setActiveTab('overview')}
@@ -120,7 +121,7 @@ const Home = () => {
         
         <div className="tab-content">
           {activeTab === 'overview' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               <FeatureCard 
                 icon="/icons/ai-assistant.svg"
                 title="AI Meeting Assistant"
@@ -155,11 +156,11 @@ const Home = () => {
           )}
           
           {activeTab === 'ai' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="md:col-span-2 bg-gradient-to-r from-secondary-800 to-secondary-900 p-6 rounded-lg border border-secondary-700">
-                <h3 className="text-xl font-bold mb-4 text-gradient">AI-Powered Meeting Experience</h3>
-                <p className="text-secondary-300 mb-4">Our advanced AI features transform how you conduct and follow up on meetings.</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="md:col-span-2 bg-gradient-to-r from-secondary-800 to-secondary-900 p-5 rounded-lg border border-secondary-700">
+                <h3 className="text-lg font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">AI-Powered Meeting Experience</h3>
+                <p className="text-secondary-300 mb-4 text-sm md:text-base">Our advanced AI features transform how you conduct and follow up on meetings.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                   <AIFeatureItem title="Smart Summaries" description="AI automatically creates concise meeting summaries" />
                   <AIFeatureItem title="Action Item Detection" description="Identifies and tracks tasks mentioned during meetings" />
                   <AIFeatureItem title="Sentiment Analysis" description="Understands meeting mood and participant engagement" />
@@ -180,7 +181,7 @@ const Home = () => {
           )}
           
           {activeTab === 'collaboration' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <FeatureCard 
                 icon="/icons/whiteboard.svg"
                 title="Interactive Whiteboard"
@@ -205,15 +206,15 @@ const Home = () => {
           )}
           
           {activeTab === 'security' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="md:col-span-2 bg-gradient-to-r from-secondary-800 to-secondary-900 p-6 rounded-lg border border-secondary-700">
-                <h3 className="text-xl font-bold mb-4 text-gradient">Enterprise-Grade Security</h3>
-                <p className="text-secondary-300 mb-4">MeetSync provides end-to-end encryption and advanced security features to keep your meetings private and secure.</p>
-                <div className="flex flex-wrap gap-3 mt-4">
-                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-sm">End-to-End Encryption</span>
-                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-sm">SOC 2 Compliant</span>
-                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-sm">GDPR Compliant</span>
-                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-sm">HIPAA Compliant</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="md:col-span-2 bg-gradient-to-r from-secondary-800 to-secondary-900 p-5 rounded-lg border border-secondary-700">
+                <h3 className="text-lg font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">Enterprise-Grade Security</h3>
+                <p className="text-secondary-300 mb-4 text-sm md:text-base">MeetSync provides end-to-end encryption and advanced security features to keep your meetings private and secure.</p>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-xs">End-to-End Encryption</span>
+                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-xs">SOC 2 Compliant</span>
+                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-xs">GDPR Compliant</span>
+                  <span className="px-3 py-1 bg-secondary-800 rounded-full text-xs">HIPAA Compliant</span>
                 </div>
               </div>
               <FeatureCard 
@@ -242,12 +243,12 @@ interface FeatureCardProps {
 
 const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
   return (
-    <div className="bg-secondary-800/50 p-6 rounded-lg border border-secondary-700/50 hover:bg-secondary-800/80 transition-colors">
-      <div className="size-12 rounded-lg bg-primary-600/20 flex items-center justify-center mb-4">
-        <Image src={icon} width={24} height={24} alt={title} />
+    <div className="bg-secondary-800/50 p-4 rounded-lg border border-secondary-700/50 hover:bg-secondary-800/80 transition-colors h-full">
+      <div className="size-10 rounded-lg bg-primary-600/20 flex items-center justify-center mb-3">
+        <Image src={icon} width={20} height={20} alt={title} />
       </div>
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-secondary-300">{description}</p>
+      <h3 className="text-base font-semibold mb-2">{title}</h3>
+      <p className="text-secondary-300 text-sm">{description}</p>
     </div>
   );
 };
@@ -263,7 +264,7 @@ const TabButton = ({ children, active, onClick }: TabButtonProps) => {
     <button
       onClick={onClick}
       className={cn(
-        "px-4 py-2 rounded-lg transition-colors relative",
+        "px-3 py-1.5 rounded-lg transition-colors relative text-sm",
         active 
           ? "bg-primary-600/20 text-primary-400" 
           : "bg-secondary-800/50 text-secondary-300 hover:bg-secondary-800"
@@ -282,9 +283,9 @@ interface AIFeatureItemProps {
 
 const AIFeatureItem = ({ title, description }: AIFeatureItemProps) => {
   return (
-    <div className="bg-secondary-900/50 p-4 rounded-lg border border-secondary-800">
-      <h4 className="font-medium mb-1">{title}</h4>
-      <p className="text-sm text-secondary-400">{description}</p>
+    <div className="bg-secondary-900/50 p-3 rounded-lg border border-secondary-800">
+      <h4 className="font-medium mb-1 text-sm">{title}</h4>
+      <p className="text-xs text-secondary-400">{description}</p>
     </div>
   );
 };

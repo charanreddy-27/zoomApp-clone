@@ -14,14 +14,15 @@ const Navbar = () => {
   
   // Performance optimized scroll listener with throttling
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      requestAnimationFrame(() => {
-        if (window.scrollY > 10) {
-          setScrolled(true);
-        } else {
-          setScrolled(false);
-        }
-      });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -33,8 +34,8 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-200",
         scrolled 
-          ? "bg-secondary-900/90 backdrop-blur-md py-2 shadow-md" 
-          : "bg-transparent py-4"
+          ? "bg-secondary-900/95 backdrop-blur-md py-2 shadow-md" 
+          : "bg-secondary-950/80 backdrop-blur-sm py-3"
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
@@ -43,29 +44,29 @@ const Navbar = () => {
           className="flex items-center gap-2 group"
           prefetch={true}
         >
-          <div className="relative size-9 overflow-hidden">
+          <div className="relative size-8 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-tr from-primary-600 to-accent-500 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
             <Image
               src="/icons/logo.svg"
-              width={36}
-              height={36}
+              width={32}
+              height={32}
               alt="MeetSync"
-              className="relative z-10 p-1.5"
+              className="relative z-10 p-1"
               priority
             />
           </div>
-          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400 hidden sm:block">
+          <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400 hidden sm:block">
             MeetSync
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-5">
           <NavLink href="/features">Features</NavLink>
           <NavLink href="/pricing">Pricing</NavLink>
           <NavLink href="/support">Support</NavLink>
         </nav>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <ThemeToggle />
           
           <SignedIn>
@@ -97,7 +98,7 @@ const NavLink = ({ href, children }: NavLinkProps) => {
   return (
     <Link 
       href={href}
-      className="text-secondary-100 hover:text-white transition-colors relative group py-1 px-1"
+      className="text-secondary-200 hover:text-white transition-colors relative group py-1 px-1 text-sm"
       prefetch={true}
     >
       {children}
