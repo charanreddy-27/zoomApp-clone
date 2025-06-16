@@ -29,7 +29,7 @@ const Sidebar = () => {
   }, [router]);
 
   return (
-    <aside className="hidden md:flex flex-col h-screen w-[220px] bg-gradient-to-b from-secondary-900 to-secondary-950 border-r border-secondary-800/50 fixed left-0 top-0 z-40">
+    <aside className="hidden md:flex flex-col h-screen w-[240px] bg-gradient-to-b from-secondary-900 to-secondary-950 border-r border-secondary-800/50 fixed left-0 top-0 z-40">
       <div className="flex flex-col flex-1 overflow-y-auto pt-16 pb-4 px-3 scrollbar-thin scrollbar-thumb-secondary-700 scrollbar-track-transparent">
         <div className="space-y-1.5">
           {sidebarLinks.map((item) => {
@@ -43,22 +43,23 @@ const Sidebar = () => {
                 className={cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-sm',
                   isActive 
-                    ? 'bg-gradient-to-r from-teal-500/20 to-primary-600/20 text-teal-400 shadow-sm' 
+                    ? 'bg-gradient-to-r from-purple-500/20 to-accent-600/20 text-purple-400 shadow-sm' 
                     : 'text-secondary-300 hover:bg-secondary-800/80 hover:text-white'
                 )}
               >
-                <div className="relative flex-shrink-0 size-5">
+                <div className="relative flex-shrink-0 size-5 flex items-center justify-center">
                   <Image
                     src={item.imgURL}
                     alt={item.label}
                     width={18}
                     height={18}
-                    className={cn({
-                      "text-teal-400": isActive
-                    })}
+                    className={cn(
+                      "brightness-110 contrast-125",
+                      isActive ? "text-purple-400 filter-none" : "opacity-80"
+                    )}
                   />
                   {isActive && (
-                    <span className="absolute -right-0.5 -top-0.5 size-2 bg-teal-500 rounded-full animate-pulse" />
+                    <span className="absolute -right-0.5 -top-0.5 size-2 bg-purple-500 rounded-full animate-pulse" />
                   )}
                 </div>
                 <span className="font-medium">{item.label}</span>
@@ -72,13 +73,14 @@ const Sidebar = () => {
         <div className="space-y-2.5">
           <Link
             href="/meeting/new"
-            className="flex items-center justify-center gap-2 w-full py-2.5 px-3 bg-gradient-to-r from-teal-500 to-primary-600 hover:from-teal-600 hover:to-primary-700 text-white rounded-lg transition-all shadow-md"
+            className="flex items-center justify-center gap-2 w-full py-2.5 px-3 bg-gradient-to-r from-purple-500 to-accent-600 hover:from-purple-600 hover:to-accent-700 text-white rounded-lg transition-all shadow-md"
           >
             <Image 
               src="/icons/add-meeting.svg" 
               alt="New Meeting" 
               width={16} 
               height={16} 
+              className="brightness-110"
             />
             <span className="text-sm font-medium">New Meeting</span>
           </Link>
@@ -92,6 +94,7 @@ const Sidebar = () => {
               alt="Join Meeting" 
               width={16} 
               height={16} 
+              className="brightness-110"
             />
             <span className="text-sm font-medium">Join Meeting</span>
           </Link>

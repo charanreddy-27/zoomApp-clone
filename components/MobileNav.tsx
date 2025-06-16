@@ -67,7 +67,7 @@ const MobileNav = () => {
             <div className="p-4 border-b border-secondary-800/50">
               <div className="flex items-center gap-2">
                 <div className="relative size-8 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 to-primary-600 rounded-lg" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500 to-accent-600 rounded-lg" />
                   <Image
                     src="/icons/logo.svg"
                     width={32}
@@ -77,7 +77,7 @@ const MobileNav = () => {
                     priority
                   />
                 </div>
-                <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-primary-400">
+                <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-accent-400">
                   MeetSync
                 </span>
               </div>
@@ -95,22 +95,23 @@ const MobileNav = () => {
                         className={cn(
                           "w-full text-left px-3 py-2.5 rounded-lg transition-all flex items-center gap-3",
                           isActive 
-                            ? "bg-gradient-to-r from-teal-500/20 to-primary-600/20 text-teal-400 shadow-sm" 
+                            ? "bg-gradient-to-r from-purple-500/20 to-accent-600/20 text-purple-400 shadow-sm" 
                             : "text-secondary-300 hover:bg-secondary-800/80 hover:text-white"
                         )}
                       >
-                        <div className="relative flex-shrink-0 size-5">
+                        <div className="relative flex-shrink-0 size-5 flex items-center justify-center">
                           <Image
                             src={link.icon}
                             alt=""
                             width={18}
                             height={18}
-                            className={cn({
-                              "text-teal-400": isActive
-                            })}
+                            className={cn(
+                              "brightness-110 contrast-125",
+                              isActive ? "text-purple-400 filter-none" : "opacity-80"
+                            )}
                           />
                           {isActive && (
-                            <span className="absolute -right-0.5 -top-0.5 size-2 bg-teal-500 rounded-full animate-pulse" />
+                            <span className="absolute -right-0.5 -top-0.5 size-2 bg-purple-500 rounded-full animate-pulse" />
                           )}
                         </div>
                         <span className="text-sm font-medium">{link.label}</span>
@@ -124,14 +125,15 @@ const MobileNav = () => {
             <div className="p-3 border-t border-secondary-800/50 bg-secondary-900/95">
               <div className="flex flex-col gap-2.5">
                 <button 
-                  className="w-full py-2.5 px-3 bg-gradient-to-r from-teal-500 to-primary-600 hover:from-teal-600 hover:to-primary-700 text-white rounded-lg transition-all shadow-md text-sm font-medium flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-gradient-to-r from-purple-500 to-accent-600 hover:from-purple-600 hover:to-accent-700 text-white rounded-lg transition-all shadow-md text-sm font-medium flex items-center justify-center gap-2"
                   onClick={() => handleNavigation('/meeting/new')}
                 >
                   <Image 
                     src="/icons/add-meeting.svg" 
                     alt="" 
                     width={16} 
-                    height={16} 
+                    height={16}
+                    className="brightness-110"
                   />
                   New Meeting
                 </button>

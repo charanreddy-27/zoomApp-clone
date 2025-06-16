@@ -42,16 +42,16 @@ export default function RootLayout({
             logoImageUrl: "/icons/logo.svg",
           },
           variables: {
-            colorPrimary: "hsl(217.2, 91.2%, 59.8%)",
+            colorPrimary: "hsl(270, 95%, 60%)",
             colorBackground: "hsl(222.2, 84%, 4.9%)",
             colorInputBackground: "hsl(217.2, 32.6%, 17.5%)",
             colorInputText: "hsl(210, 40%, 98%)",
             colorText: "hsl(210, 40%, 98%)",
           },
           elements: {
-            formButtonPrimary: "shadow-md hover:shadow-lg transition-all duration-200",
-            card: "shadow-lg",
-            formFieldInput: "transition-all duration-200 focus:shadow-md",
+            formButtonPrimary: "bg-gradient-to-r from-purple-600 to-accent-600 shadow-md hover:shadow-lg transition-all duration-200",
+            card: "shadow-lg bg-secondary-900/95 border border-secondary-800/50",
+            formFieldInput: "transition-all duration-200 focus:shadow-md focus:border-purple-500",
           },
         }}
       >

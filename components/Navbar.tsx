@@ -45,7 +45,7 @@ const Navbar = () => {
           prefetch={true}
         >
           <div className="relative size-8 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 to-accent-500 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-500 to-accent-500 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
             <Image
               src="/icons/logo.svg"
               width={32}
@@ -55,7 +55,7 @@ const Navbar = () => {
               priority
             />
           </div>
-          <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-accent-400 hidden sm:block">
+          <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-accent-400 hidden sm:block">
             MeetSync
           </span>
         </Link>
@@ -102,7 +102,7 @@ const NavLink = ({ href, children }: NavLinkProps) => {
       prefetch={true}
     >
       {children}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-teal-500 to-primary-500 transition-all duration-300 group-hover:w-full opacity-80" />
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-accent-500 transition-all duration-300 group-hover:w-full opacity-80" />
     </Link>
   );
 };

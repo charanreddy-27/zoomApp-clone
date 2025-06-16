@@ -13,13 +13,13 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
     
-    --primary: 171 75% 40%;
+    --primary: 270 95% 60%;
     --primary-foreground: 222.2 47.4% 11.2%;
     
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     
-    --accent: 217 91% 60%;
+    --accent: 245 100% 60%;
     --accent-foreground: 222.2 47.4% 11.2%;
     
     --destructive: 0 84.2% 60.2%;
@@ -27,7 +27,7 @@
     
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 171 75% 40%;
+    --ring: 270 95% 60%;
     
     --radius: 0.75rem;
   }
@@ -110,22 +110,34 @@ img, video, canvas, svg {
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
-  width: 6px;
-  height: 6px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 23, 42, 0.2);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(168, 85, 247, 0.4);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(168, 85, 247, 0.6);
+}
+
+/* Tailwind scrollbar plugin classes */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-secondary-700 {
+  scrollbar-color: rgba(168, 85, 247, 0.4) transparent;
+}
+
+.scrollbar-track-transparent {
+  scrollbar-track-color: transparent;
 }
 
 /* Datepicker customization */
@@ -171,7 +183,7 @@ img, video, canvas, svg {
   position: absolute;
   opacity: 0.5;
   animation: float-around linear infinite, glow 3s ease-in-out infinite alternate;
-  box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 5px rgba(168, 85, 247, 0.5);
 }
 
 @keyframes float-around {
@@ -194,11 +206,11 @@ img, video, canvas, svg {
 
 @keyframes glow {
   0% {
-    box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 5px rgba(168, 85, 247, 0.3);
     opacity: 0.3;
   }
   100% {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
     opacity: 0.6;
   }
 }
@@ -245,10 +257,18 @@ img, video, canvas, svg {
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-accent-500;
   }
   
   .hover-card {
-    @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-md;
+    @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+  
+  .purple-glow {
+    @apply shadow-[0_0_15px_rgba(168,85,247,0.4)];
+  }
+  
+  .purple-gradient {
+    @apply bg-gradient-to-r from-purple-500 to-accent-600;
   }
 }
