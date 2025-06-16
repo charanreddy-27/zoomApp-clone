@@ -17,14 +17,16 @@ export default async function RootLayout({
   if (!userId) redirect('/sign-in');
 
   return (
-    <div className="min-h-screen bg-secondary-950 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-950 to-secondary-900 flex flex-col">
       <Navbar />
       
       <div className="flex flex-1">
         <Sidebar />
         
-        <main className="flex-1 ml-0 md:ml-[240px] pt-20 px-4 md:px-8 lg:px-16">
-          {children}
+        <main className="flex-1 ml-0 md:ml-[220px] pt-20 px-4 md:px-8 lg:px-12 transition-all duration-300 ease-in-out">
+          <div className="max-w-7xl mx-auto w-full">
+            {children}
+          </div>
         </main>
       </div>
       

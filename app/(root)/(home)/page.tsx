@@ -34,10 +34,10 @@ const Home = () => {
               <Link href="/meeting/new" className="px-5 py-2.5 bg-gradient-to-r from-primary-600 to-accent-600 hover:from-primary-700 hover:to-accent-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all text-center font-medium">
                 Start New Meeting
               </Link>
-              <button className="px-5 py-2.5 bg-secondary-800 hover:bg-secondary-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all group flex items-center justify-center font-medium">
+              <Link href="/meeting/join" className="px-5 py-2.5 bg-secondary-800 hover:bg-secondary-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all group flex items-center justify-center font-medium">
                 Join Meeting
                 <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
-              </button>
+              </Link>
             </div>
           </div>
           <div className="relative h-[280px] md:h-[360px]">
@@ -231,6 +231,37 @@ const Home = () => {
           )}
         </div>
       </section>
+      
+      {/* Quick access section */}
+      <section className="py-8 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Quick Access</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <QuickAccessCard 
+            icon="/icons/room.svg"
+            title="Personal Room"
+            description="Your dedicated meeting space"
+            link="/personal-room"
+          />
+          <QuickAccessCard 
+            icon="/icons/calendar.svg"
+            title="Upcoming Meetings"
+            description="View your scheduled meetings"
+            link="/upcoming"
+          />
+          <QuickAccessCard 
+            icon="/icons/recording.svg"
+            title="Recordings"
+            description="Access your meeting recordings"
+            link="/recordings"
+          />
+          <QuickAccessCard 
+            icon="/icons/settings.svg"
+            title="Settings"
+            description="Configure your preferences"
+            link="/settings"
+          />
+        </div>
+      </section>
     </div>
   );
 };
@@ -248,7 +279,7 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
         <Image src={icon} width={20} height={20} alt={title} />
       </div>
       <h3 className="text-base font-semibold mb-2">{title}</h3>
-      <p className="text-secondary-300 text-sm">{description}</p>
+      <p className="text-sm text-secondary-300">{description}</p>
     </div>
   );
 };
@@ -262,16 +293,13 @@ interface TabButtonProps {
 const TabButton = ({ children, active, onClick }: TabButtonProps) => {
   return (
     <button
-      onClick={onClick}
       className={cn(
-        "px-3 py-1.5 rounded-lg transition-colors relative text-sm",
-        active 
-          ? "bg-primary-600/20 text-primary-400" 
-          : "bg-secondary-800/50 text-secondary-300 hover:bg-secondary-800"
+        "px-4 py-2 rounded-lg transition-colors",
+        active ? "bg-primary-600 text-white" : "bg-secondary-800 text-secondary-300 hover:bg-secondary-700 hover:text-white"
       )}
+      onClick={onClick}
     >
       {children}
-      {active && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-primary-500" />}
     </button>
   );
 };
@@ -283,10 +311,39 @@ interface AIFeatureItemProps {
 
 const AIFeatureItem = ({ title, description }: AIFeatureItemProps) => {
   return (
-    <div className="bg-secondary-900/50 p-3 rounded-lg border border-secondary-800">
-      <h4 className="font-medium mb-1 text-sm">{title}</h4>
-      <p className="text-xs text-secondary-400">{description}</p>
+    <div className="flex items-start gap-3">
+      <div className="size-8 rounded-full bg-primary-600/30 flex items-center justify-center mt-0.5">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h4 className="font-medium text-white">{title}</h4>
+        <p className="text-sm text-secondary-300">{description}</p>
+      </div>
     </div>
+  );
+};
+
+interface QuickAccessCardProps {
+  icon: string;
+  title: string;
+  description: string;
+  link: string;
+}
+
+const QuickAccessCard = ({ icon, title, description, link }: QuickAccessCardProps) => {
+  return (
+    <Link 
+      href={link}
+      className="bg-secondary-800/50 p-4 rounded-lg border border-secondary-700/50 hover:bg-secondary-800/80 transition-colors flex flex-col items-center text-center"
+    >
+      <div className="size-12 rounded-full bg-primary-600/20 flex items-center justify-center mb-3">
+        <Image src={icon} width={24} height={24} alt={title} />
+      </div>
+      <h3 className="text-base font-semibold mb-1">{title}</h3>
+      <p className="text-xs text-secondary-400">{description}</p>
+    </Link>
   );
 };
 

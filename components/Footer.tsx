@@ -3,13 +3,13 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary-900 border-t border-secondary-800">
+    <footer className="bg-gradient-to-t from-secondary-950 to-secondary-900 border-t border-secondary-800/50">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-4">
               <div className="relative size-10 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary-600 to-accent-500 rounded-lg" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 to-accent-500 rounded-lg" />
                 <Image
                   src="/icons/logo.svg"
                   width={40}
@@ -18,7 +18,7 @@ const Footer = () => {
                   className="relative z-10 p-1.5"
                 />
               </div>
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-accent-400">
                 MeetSync
               </span>
             </Link>
@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Product</h3>
+            <h3 className="text-lg font-semibold mb-4 text-teal-400">Product</h3>
             <ul className="space-y-3">
               <FooterLink href="/features">Features</FooterLink>
               <FooterLink href="/pricing">Pricing</FooterLink>
@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <h3 className="text-lg font-semibold mb-4 text-teal-400">Company</h3>
             <ul className="space-y-3">
               <FooterLink href="/about">About Us</FooterLink>
               <FooterLink href="/careers">Careers</FooterLink>
@@ -53,7 +53,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-secondary-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-secondary-800/50 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-secondary-400 text-sm">
             &copy; {new Date().getFullYear()} MeetSync. All rights reserved.
           </p>
@@ -79,7 +79,7 @@ const FooterLink = ({ href, children, small = false }: FooterLinkProps) => {
     <li>
       <Link 
         href={href} 
-        className={`text-secondary-400 hover:text-white transition-colors ${small ? 'text-sm' : ''}`}
+        className={`text-secondary-400 hover:text-teal-400 transition-colors ${small ? 'text-sm' : ''}`}
       >
         {children}
       </Link>
@@ -97,7 +97,7 @@ const SocialLink = ({ href, icon, label }: SocialLinkProps) => {
   return (
     <Link 
       href={href}
-      className="size-10 rounded-full bg-secondary-800 flex items-center justify-center hover:bg-primary-600/20 transition-colors"
+      className="size-10 rounded-full bg-secondary-800/80 flex items-center justify-center hover:bg-teal-600/20 hover:border-teal-500/30 border border-transparent transition-all"
       aria-label={label}
     >
       <Image 

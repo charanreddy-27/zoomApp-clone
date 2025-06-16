@@ -32,9 +32,9 @@ const Navbar = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-200",
+        "fixed top-0 z-50 w-full transition-all duration-300",
         scrolled 
-          ? "bg-secondary-900/95 backdrop-blur-md py-2 shadow-md" 
+          ? "bg-secondary-900/95 backdrop-blur-md py-2 shadow-md border-b border-secondary-800/50" 
           : "bg-secondary-950/80 backdrop-blur-sm py-3"
       )}
     >
@@ -45,7 +45,7 @@ const Navbar = () => {
           prefetch={true}
         >
           <div className="relative size-8 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary-600 to-accent-500 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 to-accent-500 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
             <Image
               src="/icons/logo.svg"
               width={32}
@@ -55,18 +55,18 @@ const Navbar = () => {
               priority
             />
           </div>
-          <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400 hidden sm:block">
+          <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-accent-400 hidden sm:block">
             MeetSync
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-5">
+        <nav className="hidden md:flex items-center gap-6">
           <NavLink href="/features">Features</NavLink>
           <NavLink href="/pricing">Pricing</NavLink>
           <NavLink href="/support">Support</NavLink>
         </nav>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <ThemeToggle />
           
           <SignedIn>
@@ -74,7 +74,7 @@ const Navbar = () => {
               afterSignOutUrl="/sign-in"
               appearance={{
                 elements: {
-                  userButtonAvatarBox: "hover:scale-105 transition-transform"
+                  userButtonAvatarBox: "hover:scale-105 transition-transform shadow-sm"
                 }
               }}
             />
@@ -98,11 +98,11 @@ const NavLink = ({ href, children }: NavLinkProps) => {
   return (
     <Link 
       href={href}
-      className="text-secondary-200 hover:text-white transition-colors relative group py-1 px-1 text-sm"
+      className="text-secondary-300 hover:text-white transition-colors relative group py-1.5 px-1 text-sm font-medium"
       prefetch={true}
     >
       {children}
-      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full" />
+      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-teal-500 to-primary-500 transition-all duration-300 group-hover:w-full opacity-80" />
     </Link>
   );
 };

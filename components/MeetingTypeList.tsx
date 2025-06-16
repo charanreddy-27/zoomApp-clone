@@ -12,7 +12,7 @@ const meetingTypes = [
     id: 'instant',
     title: 'Instant Meeting',
     description: 'Start a meeting right now',
-    icon: '/icons/instant-meeting.svg',
+    icon: '/icons/video.svg',
     color: 'from-primary-600 to-primary-800',
     hoverColor: 'group-hover:from-primary-500 group-hover:to-primary-700',
     badge: { text: 'Popular', variant: 'gradient' as const }
@@ -21,7 +21,7 @@ const meetingTypes = [
     id: 'schedule',
     title: 'Schedule Meeting',
     description: 'Plan for later',
-    icon: '/icons/schedule.svg',
+    icon: '/icons/calendar.svg',
     color: 'from-accent-600 to-accent-800',
     hoverColor: 'group-hover:from-accent-500 group-hover:to-accent-700',
   },
@@ -37,7 +37,7 @@ const meetingTypes = [
     id: 'personal',
     title: 'Personal Room',
     description: 'Your permanent meeting space',
-    icon: '/icons/personal.svg',
+    icon: '/icons/user.svg',
     color: 'from-warning-600 to-warning-800',
     hoverColor: 'group-hover:from-warning-500 group-hover:to-warning-700',
     badge: { text: 'New', variant: 'success' as const }
@@ -51,16 +51,16 @@ const MeetingTypeList = () => {
   const handleClick = (id: string) => {
     switch (id) {
       case 'instant':
-        router.push('/meeting/new');
+        router.push('/meeting/new?type=instant');
         break;
       case 'schedule':
-        router.push('/upcoming/schedule');
+        router.push('/meeting/new?type=scheduled');
         break;
       case 'join':
         router.push('/meeting/join');
         break;
       case 'personal':
-        router.push('/personal-room');
+        router.push('/meeting/new?type=personal');
         break;
       default:
         break;

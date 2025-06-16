@@ -12,6 +12,8 @@ const navLinks = [
   { label: 'Upcoming', route: '/upcoming', icon: '/icons/calendar.svg' },
   { label: 'Previous', route: '/previous', icon: '/icons/history.svg' },
   { label: 'Recordings', route: '/recordings', icon: '/icons/recording.svg' },
+  { label: 'Join Meeting', route: '/meeting/join', icon: '/icons/join.svg' },
+  { label: 'Settings', route: '/settings', icon: '/icons/settings.svg' },
   { label: 'Features', route: '/features', icon: '/icons/features.svg' },
   { label: 'Pricing', route: '/pricing', icon: '/icons/pricing.svg' },
   { label: 'Support', route: '/support', icon: '/icons/support.svg' },
@@ -39,7 +41,7 @@ const MobileNav = () => {
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <button 
-            className="flex flex-col gap-1 p-1.5 focus:outline-none" 
+            className="flex flex-col gap-1 p-2 focus:outline-none z-50" 
             aria-label="Menu"
           >
             <span className={cn(
@@ -59,13 +61,13 @@ const MobileNav = () => {
         
         <SheetContent 
           side="right" 
-          className="w-full max-w-[280px] p-0 border-none bg-secondary-900"
+          className="w-full max-w-[280px] p-0 border-none bg-gradient-to-b from-secondary-900 to-secondary-950 z-50"
         >
           <div className="flex flex-col h-full">
-            <div className="p-4 border-b border-secondary-800">
+            <div className="p-4 border-b border-secondary-800/50">
               <div className="flex items-center gap-2">
                 <div className="relative size-8 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-primary-600 to-accent-500 rounded-lg" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-teal-500 to-primary-600 rounded-lg" />
                   <Image
                     src="/icons/logo.svg"
                     width={32}
@@ -75,14 +77,14 @@ const MobileNav = () => {
                     priority
                   />
                 </div>
-                <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">
+                <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-primary-400">
                   MeetSync
                 </span>
               </div>
             </div>
             
-            <nav className="flex-1 overflow-y-auto py-4 px-3">
-              <ul className="flex flex-col gap-1">
+            <nav className="flex-1 overflow-y-auto py-4 px-3 scrollbar-thin scrollbar-thumb-secondary-700 scrollbar-track-transparent">
+              <ul className="flex flex-col gap-1.5">
                 {navLinks.map((link) => {
                   const isActive = pathname === link.route || pathname.startsWith(`${link.route}/`);
                   
@@ -91,24 +93,24 @@ const MobileNav = () => {
                       <button
                         onClick={() => handleNavigation(link.route)}
                         className={cn(
-                          "w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-3",
+                          "w-full text-left px-3 py-2.5 rounded-lg transition-all flex items-center gap-3",
                           isActive 
-                            ? "bg-primary-600/20 text-primary-400" 
-                            : "text-secondary-200 hover:bg-secondary-800 hover:text-white"
+                            ? "bg-gradient-to-r from-teal-500/20 to-primary-600/20 text-teal-400 shadow-sm" 
+                            : "text-secondary-300 hover:bg-secondary-800/80 hover:text-white"
                         )}
                       >
-                        <div className="relative flex-shrink-0 size-4">
+                        <div className="relative flex-shrink-0 size-5">
                           <Image
                             src={link.icon}
                             alt=""
-                            width={16}
-                            height={16}
+                            width={18}
+                            height={18}
                             className={cn({
-                              "text-primary-400": isActive
+                              "text-teal-400": isActive
                             })}
                           />
                           {isActive && (
-                            <span className="absolute -right-0.5 -top-0.5 size-1.5 bg-primary-500 rounded-full animate-pulse" />
+                            <span className="absolute -right-0.5 -top-0.5 size-2 bg-teal-500 rounded-full animate-pulse" />
                           )}
                         </div>
                         <span className="text-sm font-medium">{link.label}</span>
@@ -119,10 +121,10 @@ const MobileNav = () => {
               </ul>
             </nav>
             
-            <div className="p-3 border-t border-secondary-800">
-              <div className="flex flex-col gap-3">
+            <div className="p-3 border-t border-secondary-800/50 bg-secondary-900/95">
+              <div className="flex flex-col gap-2.5">
                 <button 
-                  className="w-full py-2 px-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-3 bg-gradient-to-r from-teal-500 to-primary-600 hover:from-teal-600 hover:to-primary-700 text-white rounded-lg transition-all shadow-md text-sm font-medium flex items-center justify-center gap-2"
                   onClick={() => handleNavigation('/meeting/new')}
                 >
                   <Image 
@@ -134,7 +136,7 @@ const MobileNav = () => {
                   New Meeting
                 </button>
                 <button 
-                  className="w-full py-2 px-3 bg-secondary-800 hover:bg-secondary-700 text-white rounded-lg transition-colors text-sm font-medium"
+                  className="w-full py-2.5 px-3 bg-secondary-800 hover:bg-secondary-700 text-white rounded-lg transition-colors text-sm font-medium border border-secondary-700/50"
                   onClick={() => handleNavigation('/sign-out')}
                 >
                   Sign Out
